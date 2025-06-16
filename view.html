@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Blog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header><h1>View Blog</h1></header>
+  <div id="blogContent"></div>
+  <a href="index.html" class="btn">Back to Home</a>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    const blog = blogs.find(b => b.id === id);
+
+    if (blog) {
+      document.getElementById("blogContent").innerHTML = `
+        <h2>${blog.title}</h2>
+        <p>${blog.content}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
