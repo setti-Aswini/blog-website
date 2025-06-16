@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Blog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header><h1>Add a New Blog</h1></header>
+  <form id="blogForm">
+    <input type="text" id="title" placeholder="Title" required />
+    <textarea id="content" placeholder="Content" required></textarea>
+    <button type="submit" class="btn">Post</button>
+  </form>
+  <a href="index.html" class="btn">Cancel</a>
+
+  <script>
+    document.getElementById("blogForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const title = document.getElementById("title").value.trim();
+      const content = document.getElementById("content").value.trim();
+
+      const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+      blogs.push({ id: Date.now().toString(), title, content });
+      localStorage.setItem("blogs", JSON.stringify(blogs));
+
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
